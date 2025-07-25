@@ -768,10 +768,10 @@ import * as React6 from "react";
 import { jsx as jsx14 } from "react/jsx-runtime";
 var { useEffect: useEffect3, useRef: useRef2 } = React6;
 var GISCUS_CONFIG = {
-  repo: "joaquingalasso/antilogia-comments",
-  repoId: "R_kgDOMf5rNA",
-  category: "Comentarios de Relatos",
-  categoryId: "DIC_kwDOMf5rNM4ChbqG"
+  repo: "joaquingalasso/antilogia",
+  repoId: "R_kgDOPSlhsQ",
+  category: "Announcements",
+  categoryId: "DIC_kwDOPSlhsc4CtZy7"
 };
 var Giscus = ({ term, theme, lang }) => {
   const ref = useRef2(null);
