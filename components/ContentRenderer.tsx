@@ -85,6 +85,9 @@ const renderBlock = (block: ContentBlock, index: number) => {
                     case 'character':
                         return <span>{value}</span>;
                     case 'svg':
+                        if (value?.endsWith('.svg')) {
+                            return <span className="ornament-svg" style={{ maskImage: `url(${value})`, WebkitMaskImage: `url(${value})` }}></span>;
+                        }
                         return <span className="ornament-svg" dangerouslySetInnerHTML={{ __html: value || '' }} />;
                     case 'default':
                     default:

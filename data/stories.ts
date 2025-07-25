@@ -51,7 +51,9 @@ const boaContent: ContentBlock[] = [
     attribution: '...parecía decir su quietud. Y yo asentía, cerrando los ojos, volviendo a ese sueño del que sabía que, una noche, no despertaría.'
   },
   {
-    type: 'ornament'
+    type: 'ornament',
+    variant: 'svg',
+    value: '/assets/ornament-boa.svg'
   }
 ];
 
@@ -161,8 +163,8 @@ export const stories: Story[] = [
     date: "2025-07-23",
     tagline: "Un abrazo tibio y asfixiante. ¡Qué tierna!",
     color: { light: "#0b6d4f", dark: "#10a375" },
-    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0xMjgsMjRBMTA0LDEwNCwwLDEsMCwyMzIsMTI4LDEwNC4xMSwxMDQuMTEsMCwwLDAsMTI4LDI0Wm0wLDE5MmE4OCw4OCwwLDEsMSw4OC04OEg4OC4xLDg4LjEsMCwwLDEsMTI4LDIxNlpNMTkyLDEyOGE2NCw2NCwwLDEsMS02NC02NEE2NC4wNyw2NC4wNywwLDAsMSwxOTIsMTI4Wm0tMTYsMGE0OCw0OCwwLDEsMC00OCw0OEE0OC4wNSw0OC4wNSwwLDAsMCwxNzYsMTI4Wm0tMzIsMGExNiwxNiwwLDEsMC0xNiwxNkExNiwxNiwwLDAsMCwxNDQsMTI4WiIvPjwvc3ZnPg==",
-    ornament: { type: 'ornament' },
+    icon: "/assets/icon-boa.svg",
+    ornament: { type: 'ornament' , variant: 'svg', value: "/assets/ornament-boa.svg" },
     category: "Relato Corto",
     tags: ["Suspenso", "Psicológico", "Animales"],
     content: boaContent
@@ -173,7 +175,7 @@ export const stories: Story[] = [
     date: "2024-11-12",
     tagline: "La luz que guía es también la que escucha.",
     color: { light: "#015c7e", dark: "#0090c8" },
-    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q2sb3IiPjxwYXRoIGQ9Ik0xMDQsMjE2aDQ4YTgsOCwwLDAsMSwwLDE2aC00OGE4LDgsMCwwLDEsMC0xNlptMTItNDBMg4OC4yLDQ4LjU2QTgsOCwwLDAsMSw5NiwzMmg2NGE4LDgsMCwwLDEsNy44LDE2LjU2TDE0MCwxNzZoLTI0Zm05OS41NC01Ny4yNi00OC0yNGE4LDgsMCwxLDAtNy4wOCwxNC41MkwyMDQuMjUsMTI4bC00NS43OSwyMi43NGE4LDgsMCwwLDAsNy4wOCwxNC41Mmw0OC0yNGE4LDgsMCwwLDAsMC0xNC41MlpNNDAuNDYsMTEwLjc0YTgsOCwwLDAsMC03LjA4LTEuMjZsLTQ4LDI0YTgsOCwwLDAsMCwwLDE0LjUybDQ4LDI0YTgsOCwwLDEsMCw3LjA4LTE0LjUyTDUxLjc1LDEyOGw0NS43OS0yMi43NEExOCw4LDAsMCwwLDQwLjQ2LDExMC43NFoiLz48L3N2Zz4=",
+    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q1vb3IiPjxwYXRoIGQ9Ik0xMDQsMjE2aDQ4YTgsOCwwLDAsMSwwLDE2aC00OGE4LDgsMCwwLDEsMC0xNlptMTItNDBMg4OC4yLDQ4LjU2QTgsOCwwLDAsMSw5NiwzMmg2NGE4LDgsMCwwLDEsNy44LDE2LjU2TDE0MCwxNzZoLTI0Zm05OS41NC01Ny4yNi00OC0yNGE4LDgsMCwxLDAtNy4wOCwxNC41MkwyMDQuMjUsMTI4bC00NS43OSwyMi43NGE4LDgsMCwwLDAsNy4wOCwxNC41Mmw0OC0yNGE4LDgsMCwwLDAsMC0xNC41MlpNNDAuNDYsMTEwLjc0YTgsOCwwLDAsMC03LjA4LTEuMjZsLTQ4LDI0YTgsOCwwLDAsMCwwLDE0LjUybDQ4LDI0YTgsOCwwLDEsMCw3LjA4LTE0LjUyTDUxLjc1LDEyOGw0NS43OS0yMi43NEExOCw4LDAsMCwwLDQwLjQ2LDExMC43NFoiLz48L3N2Zz4=",
     ornament: { type: 'ornament', variant: 'svg', value: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
     category: "Fábula",
     tags: ["Misterio", "Soledad", "Mar"],

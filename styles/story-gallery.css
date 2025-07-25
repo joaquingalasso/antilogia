@@ -113,12 +113,32 @@
     transition: color 0.3s ease;
 }
 
+.story-card-grid-ornament .ornament-svg-wrapper,
+.story-card-ornament-list .ornament-svg-wrapper {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+/* For file-based SVGs using mask-image */
+.story-card-grid-ornament .ornament-svg-wrapper[style*="mask-image"],
+.story-card-ornament-list .ornament-svg-wrapper[style*="mask-image"] {
+    background-color: currentColor;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* For inline SVGs using dangerouslySetInnerHTML */
 .story-card-grid-ornament .ornament-svg-wrapper svg,
 .story-card-ornament-list .ornament-svg-wrapper svg {
-    height: 1em;
-    width: auto;
+    height: 100%;
+    width: 100%;
     display: block;
-    stroke: currentColor;
     fill: currentColor;
 }
 

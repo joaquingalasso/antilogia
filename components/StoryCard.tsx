@@ -15,6 +15,11 @@ const GalleryOrnament = ({ ornament }: { ornament: OrnamentBlock }) => {
         case 'character':
             return <>{value}</>;
         case 'svg':
+            if (value?.endsWith('.svg')) {
+                // It's a file path, use it as a mask
+                return <span className="ornament-svg-wrapper" style={{ maskImage: `url(${value})`, WebkitMaskImage: `url(${value})` }}></span>;
+            }
+            // It's inline SVG markup
             return <span className="ornament-svg-wrapper" dangerouslySetInnerHTML={{ __html: value || '' }} />;
         case 'default':
         default:

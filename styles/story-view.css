@@ -190,7 +190,7 @@
     background-size: 10px 1px;
     background-repeat: repeat-x;
 }
-.cul-de-lampe span {
+.cul-de-lampe > span {
     font-size: 1.75rem;
     line-height: 1;
     color: var(--dominant-color);
@@ -199,14 +199,36 @@
     transition: color 0.5s var(--ease-out-quart);
     display: inline-block;
 }
-.cul-de-lampe span:not(.ornament-svg):empty::before {
+.cul-de-lampe > span:not(.ornament-svg):empty::before {
     content: var(--cul-de-lampe);
 }
 
+/* Container for ornament, either inline or external */
+.cul-de-lampe .ornament-svg {
+    display: inline-block;
+    height: 1.75rem; /* Match font-size of default ornament */
+    width: 6rem; /* A reasonable default width */
+    vertical-align: middle;
+}
+
+/* For file-based SVGs using mask-image */
+.cul-de-lampe .ornament-svg[style*="mask-image"] {
+    background-color: var(--dominant-color);
+    transition: background-color 0.5s var(--ease-out-quart);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* For inline SVGs */
 .cul-de-lampe .ornament-svg svg {
     display: block;
-    width: auto;
-    height: 1.75rem; /* Match font-size of default ornament */
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
     fill: var(--dominant-color);
     transition: fill 0.5s var(--ease-out-quart);
 }
