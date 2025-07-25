@@ -1,0 +1,206 @@
+/* --- Filter Aside (Desktop) --- */
+.filter-aside {
+    grid-area: aside;
+    position: sticky;
+    top: 2rem;
+    height: calc(100vh - 4rem);
+}
+.mobile-filter-content .filter-aside {
+    height: auto;
+    position: static;
+}
+.filter-group { 
+    margin-top: 2rem; 
+}
+.filter-aside .filter-group:first-child {
+    margin-top: 0;
+}
+.filter-group h3 {
+    font-family: var(--font-details); text-transform: uppercase; color: var(--gray-details);
+    letter-spacing: 0.1em; font-size: 0.9rem; margin-bottom: 1rem;
+}
+.filter-group button {
+    width: 100%; text-align: left; padding: 0.25rem 0.5rem;
+    background: transparent; border: none; color: var(--text-color);
+    font-family: var(--font-header-sub); font-size: 1.1rem; cursor: pointer;
+    border-radius: 6px; transition: all 0.3s ease; margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter-group button:hover { background-color: var(--hover-bg-color); }
+.filter-group button.active { font-weight: 600; color: var(--dominant-color); }
+
+/* Style for the tags container in the filter sidebar */
+.tags-list-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tags-list-filter .tag-filter-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-family: var(--font-details);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.8rem;
+    border-radius: 16px; /* Pill shape */
+    background-color: transparent;
+    border: 1px solid var(--outline-color);
+    color: var(--gray-details);
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out-quart), background-color 0.3s ease;
+    width: auto;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.tags-list-filter .tag-filter-item:hover {
+    color: var(--dominant-color);
+    border-color: var(--dominant-color);
+    transform: translateY(-2px);
+    background-color: var(--hover-bg-color);
+}
+
+.tags-list-filter .tag-filter-item.active {
+    background-color: var(--dominant-color);
+    color: var(--bg-color);
+    border-color: var(--dominant-color);
+}
+
+.tags-list-filter .tag-filter-item .tag-count {
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    transition: none;
+}
+
+.tags-list-filter .tag-filter-item .tag-name {
+    line-height: 1; 
+    font-weight: 400;
+}
+
+.tags-list-filter .tag-filter-item.active .tag-name {
+    font-weight: 400;
+}
+
+
+/* --- Story Aside (Desktop) --- */
+.story-aside {
+    grid-area: aside;
+    position: sticky;
+    top: 2rem;
+    height: calc(100vh - 4rem);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+.story-aside > div > h3 {
+    font-family: var(--font-details);
+    text-transform: uppercase;
+    color: var(--gray-details);
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px dotted var(--outline-color);
+}
+.story-details-group p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.story-details-group p {
+    margin-bottom: 0;
+}
+.story-details-group strong {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 0.5rem;
+}
+.story-details-group a {
+    color: var(--dominant-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.2s ease;
+}
+.story-details-group a:hover {
+    border-bottom-color: currentColor;
+}
+.story-details-tags {
+    margin-top: 1.5rem;
+}
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.tag-item {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    background-color: var(--hover-bg-color);
+    border: 1px solid var(--outline-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out-quart);
+}
+.tag-item:hover {
+    background-color: var(--dominant-color);
+    color: var(--bg-color);
+    border-color: var(--dominant-color);
+    transform: translateY(-2px);
+}
+.related-stories-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.related-story-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.related-story-button:hover {
+    background-color: var(--hover-bg-color);
+    transform: translateX(4px);
+}
+.related-story-title {
+    display: block;
+    font-family: var(--font-header-sub);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    transition: color 0.3s ease;
+}
+.related-story-button:hover .related-story-title {
+    color: var(--dominant-color);
+}
+.related-story-category {
+    display: block;
+    font-family: var(--font-details);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--gray-details);
+}
