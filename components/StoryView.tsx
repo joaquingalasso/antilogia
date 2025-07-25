@@ -22,7 +22,7 @@ export const StoryView = ({ story, onBack, isVisible, allStories, onSelectStory,
   const { t, language } = useLanguage();
   if (!story) return null;
   
-  const storyUrl = `${window.location.origin}${window.location.pathname}#/${language}/story/${story.id}`;
+  const storyUrl = `${window.location.origin}${window.location.pathname}#/story/${story.id}`;
   const headerStyle = {
     '--story-icon-url': `url("${story.icon}")`
   } as React.CSSProperties;
@@ -58,7 +58,7 @@ export const StoryView = ({ story, onBack, isVisible, allStories, onSelectStory,
 
       <section className="comments-section">
         <h2>{t('comments')}</h2>
-        <Giscus term={`${story.id}-${language}`} theme={theme} lang={language} />
+        <Giscus storyId={story.id} theme={theme} lang={language} />
       </section>
     </article>
   );

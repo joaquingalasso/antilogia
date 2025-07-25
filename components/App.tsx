@@ -67,17 +67,11 @@ export const App = () => {
   useEffect(() => {
     const handleHashChange = () => {
         const hash = window.location.hash;
-        // Match /story/{id} from a URL like #/es/story/boa
-        const storyMatch = hash.match(/story\/([^/]+)/);
-
-        if (storyMatch) {
-            const storyId = storyMatch[1];
+        if (hash.startsWith('#/story/')) {
+            const storyId = hash.substring('#/story/'.length);
             const storyToSelect = stories.find(s => s.id === storyId);
             if (storyToSelect) {
                 setSelectedStory(storyToSelect);
-            } else {
-                // Story not found, go back to the gallery for the current language
-                window.location.hash = `#/${language}/`;
             }
         } else {
             setSelectedStory(null);
@@ -91,7 +85,7 @@ export const App = () => {
     return () => {
         window.removeEventListener('hashchange', handleHashChange);
     };
-  }, [language]); // Re-run if language changes to handle story-not-found redirect correctly
+  }, []);
 
 
   const toggleTheme = () => {
@@ -100,13 +94,13 @@ export const App = () => {
 
   const handleSelectStory = (story: Story) => {
     window.scrollTo(0, 0);
-    // Create a language-specific URL
-    window.location.hash = `#/${language}/story/${story.id}`;
+    // setSelectedStory is now handled by the hashchange event listener
+    window.location.hash = `#/story/${story.id}`;
   };
   
   const handleBackToGallery = () => {
-    // Go back to the language-specific gallery
-    window.location.hash = `#/${language}/`;
+    // setSelectedStory is now handled by the hashchange event listener
+    window.location.hash = '';
   };
 
   const handleTagChange = (tag: string) => {
@@ -118,8 +112,8 @@ export const App = () => {
     window.scrollTo(0, 0);
     setActiveTag(tag);
     setActiveFilter('All');
-    // Go to the language-specific gallery
-    window.location.hash = `#/${language}/`;
+    // setSelectedStory is now handled by the hashchange event listener
+    window.location.hash = '';
   };
   
   const handleFilterChange = (filter: string) => {
