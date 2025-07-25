@@ -12,10 +12,10 @@ interface GiscusProps {
 // IMPORTANT: Replace these values with your repository's details from Giscus.app
 // You can get these from https://giscus.app
 const GISCUS_CONFIG = {
-    repo: "joaquingalasso/antilogia-comments",
-    repoId: "R_kgDOMf5rNA",
-    category: "Comentarios de Relatos",
-    categoryId: "DIC_kwDOMf5rNM4ChbqG",
+    repo: "joaquingalasso/antilogia",
+    repoId: "R_kgDOPSlhsQ",
+    category: "Announcements",
+    categoryId: "DIC_kwDOPSlhsc4CtZy7",
 };
 
 export const Giscus = ({ term, theme, lang }: GiscusProps) => {
