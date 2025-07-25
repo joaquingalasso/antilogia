@@ -773,13 +773,13 @@ var GISCUS_CONFIG = {
   category: "Announcements",
   categoryId: "DIC_kwDOPSlhsc4CtZy7"
 };
-var Giscus = ({ term, theme, lang }) => {
+var Giscus = ({ storyId, theme, lang }) => {
   const ref = useRef2(null);
   useEffect3(() => {
-    if (!ref.current || !term) {
-      return;
+    if (!ref.current || !storyId) return;
+    while (ref.current.firstChild) {
+      ref.current.removeChild(ref.current.firstChild);
     }
-    ref.current.innerHTML = "";
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.async = true;
@@ -789,16 +789,30 @@ var Giscus = ({ term, theme, lang }) => {
     script.setAttribute("data-category", GISCUS_CONFIG.category);
     script.setAttribute("data-category-id", GISCUS_CONFIG.categoryId);
     script.setAttribute("data-mapping", "specific");
-    script.setAttribute("data-term", term);
+    script.setAttribute("data-term", storyId);
     script.setAttribute("data-strict", "0");
     script.setAttribute("data-reactions-enabled", "1");
     script.setAttribute("data-emit-metadata", "0");
     script.setAttribute("data-input-position", "top");
     script.setAttribute("data-lang", lang);
     script.setAttribute("data-loading", "lazy");
-    script.setAttribute("data-theme", theme);
+    const themeUrl = `${window.location.origin}/giscus-theme.css`;
+    script.setAttribute("data-theme", themeUrl);
     ref.current.appendChild(script);
-  }, [term, lang, theme]);
+    return () => {
+      if (ref.current) {
+        while (ref.current.firstChild) {
+          ref.current.removeChild(ref.current.firstChild);
+        }
+      }
+    };
+  }, [storyId, lang]);
+  useEffect3(() => {
+    const iframe = ref.current?.querySelector("iframe.giscus-frame");
+    if (iframe) {
+      iframe.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+    }
+  }, [theme]);
   return /* @__PURE__ */ jsx14("div", { ref, className: "giscus" });
 };
 
