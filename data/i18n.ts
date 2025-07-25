@@ -43,12 +43,6 @@ export const translations = {
     copyLinkError: { es: 'Error al copiar el enlace.', en: 'Error copying link.' },
     shareMessage: { es: 'Echa un vistazo a este relato: ', en: 'Check out this story: ' },
 
-    // Link Preview
-    linkPreviewErrorTitle: { es: 'Error al previsualizar', en: 'Preview Error' },
-    linkPreviewErrorDesc: { es: 'No se pudo generar una previsualización para este enlace.', en: 'Could not generate a preview for this link.'},
-    linkPreviewError: { es: 'No se pudo generar una previsualización para este enlace.', en: 'Could not generate a preview for this link.'},
-
-
     // RSS
     rssFeed: { es: 'Canal RSS', en: 'RSS Feed' },
     subscribeToFeed: { es: 'Suscribirse al Canal', en: 'Subscribe to Feed' },
