@@ -3,12 +3,13 @@
 /* 
   This file defines styles for the Giscus commenting system to match the
   light and dark themes of the main application. It is intended to be used
-  as a custom theme URL in Giscus settings, or imported directly.
+  as a custom theme URL in Giscus settings.
 */
 
 /* 
   STEP 1: Define color palettes for both themes using CSS variables.
-  Giscus applies `data-theme="light"` or `data-theme="dark"` to its root element.
+  Giscus applies `data-theme="light"` or `data-theme="dark"` to its root element
+  based on messages from the parent window.
 */
 :root {
   /* Font Families from the main app */
@@ -29,7 +30,7 @@
   --footer-text-light: #ffefe1;
 
   /* Default to light theme values */
-  --gsc-main-bg: var(--bg-color-light);
+  --gsc-main-bg: transparent; /* Transparent background */
   --gsc-main-text: var(--text-color-light);
   --gsc-secondary-text: var(--gray-details-light);
   --gsc-accent-text: var(--dominant-color-light);
@@ -52,7 +53,8 @@
   --hover-bg-color-dark: rgba(255,255,255,0.08);
   --footer-text-dark: #ffefe1;
 
-  --gsc-main-bg: var(--bg-color-dark);
+  /* Set Giscus variables for dark mode */
+  --gsc-main-bg: transparent;
   --gsc-main-text: var(--text-color-dark);
   --gsc-secondary-text: var(--gray-details-dark);
   --gsc-accent-text: var(--dominant-color-dark);
@@ -66,21 +68,18 @@
 
 /* 
   STEP 2: Override Giscus's default Primer CSS variables with our new theme variables.
-  This ensures that all Giscus components inherit our theme's look and feel.
 */
 .giscus-frame {
   color-scheme: light dark;
 }
 
-.gsc-main {
-  /* Layout & Spacing */
-  max-width: 100%; /* Fit container */
-
+main {
+  font-family: var(--font-body);
   /* Set Primer variables to use our theme variables */
   --color-fg-default: var(--gsc-main-text);
   --color-fg-muted: var(--gsc-secondary-text);
   --color-fg-subtle: var(--gsc-secondary-text);
-  --color-canvas-default: transparent;
+  --color-canvas-default: var(--gsc-main-bg);
   --color-canvas-subtle: var(--gsc-hover-bg);
   --color-canvas-inset: var(--gsc-hover-bg);
   --color-border-default: var(--gsc-border-color);
@@ -105,138 +104,190 @@
   --color-input-bg: var(--gsc-input-bg);
   --color-input-border: var(--gsc-border-color);
   --color-input-focus-border: var(--gsc-accent-text);
-  
+  --color-input-shadow: 0 0 0 3px var(--gsc-accent-text);
+
   --color-social-reaction-bg-hover: var(--gsc-hover-bg);
   --color-social-reaction-bg-reacted-hover: var(--gsc-hover-bg);
   
   --color-neutral-muted: var(--gsc-hover-bg);
 }
 
-/* --- Comment Box --- */
+/* --- General Structure --- */
+.gsc-comment-box, .gsc-timeline-item-group {
+    border-radius: 12px;
+    border: 1px dotted var(--gsc-border-color);
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+}
 .gsc-comment-box {
-  border-radius: 12px;
-  background-color: transparent;
+    margin-bottom: 2rem;
 }
 .gsc-comment-box-tabs {
-  background-color: var(--gsc-hover-bg);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+    background-color: transparent;
+    border-bottom: 1px dotted var(--gsc-border-color);
+    padding-bottom: 0.5rem;
+}
+.gsc-tab-button {
+    border-radius: 8px !important;
+    font-family: var(--font-details);
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    color: var(--gsc-secondary-text);
+}
+.gsc-tab-button[aria-selected="true"] {
+    background-color: var(--gsc-hover-bg) !important;
+    color: var(--gsc-accent-text) !important;
+    border: none !important;
 }
 .gsc-comment-box-textarea {
-  font-family: var(--font-body);
+    font-family: var(--font-body);
+    border-radius: 8px;
+    background-color: var(--gsc-hover-bg);
+    border: 1px solid var(--gsc-border-color);
 }
-.gsc-comment-box-write:focus-within {
-  border-color: var(--gsc-accent-text) !important;
-  box-shadow: 0 0 0 1px var(--gsc-accent-text) !important;
+.gsc-comment-box-textarea:focus {
+    background-color: var(--gsc-input-bg);
+    box-shadow: 0 0 0 2px var(--gsc-accent-text) !important;
 }
+.gsc-comment-box-buttons {
+  border-top: 1px dotted var(--gsc-border-color) !important;
+  background-color: transparent !important;
+}
+
 
 /* --- Buttons --- */
 .btn {
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  font-family: var(--font-details);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  transition: all 0.3s ease;
-  box-shadow: none !important;
+    border-radius: 20px !important;
+    padding: 0.5rem 1.25rem !important;
+    font-family: var(--font-details) !important;
+    text-transform: uppercase !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    box-shadow: none !important;
+    border-width: 1px !important;
 }
 .btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  color: var(--gsc-accent-text);
+    transform: translateY(-2px);
+    color: var(--gsc-accent-text) !important;
 }
 .btn-primary {
     color: var(--gsc-button-primary-text) !important;
 }
 .btn-primary:hover:not(:disabled) {
-  color: var(--gsc-button-primary-text) !important;
-  transform: translateY(-2px);
+    color: var(--gsc-button-primary-text) !important;
+    transform: translateY(-2px);
 }
 .gsc-pagination-button {
-  background-color: var(--gsc-hover-bg);
+    background-color: var(--gsc-hover-bg);
+    border: 1px solid var(--gsc-border-color);
 }
 .gsc-pagination-button:hover {
-  background-color: var(--gsc-hover-bg);
+    background-color: var(--gsc-hover-bg);
+    border-color: var(--gsc-accent-text);
 }
 
 /* --- Comments & Markdown --- */
 .gsc-comment-content {
-  background-color: transparent;
+    background-color: transparent;
 }
 .gsc-comment-header {
-  background-color: var(--gsc-hover-bg);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 0.75rem 1rem;
+    background-color: transparent;
+    padding: 0.5rem 0;
 }
-.Box.gsc-comment-box-md-preview,
-.gsc-comment-body {
-  border: 1px solid var(--gsc-border-color);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  padding: 1rem 1.5rem;
-  background-color: transparent;
+.gsc-comment-body, .Box.gsc-comment-box-md-preview {
+    border: none;
+    padding: 1rem 0;
+    background-color: transparent;
+    color: var(--gsc-main-text);
 }
-.markdown {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
+.markdown-body {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--gsc-main-text);
 }
-.markdown a {
-  color: var(--gsc-accent-text);
-  text-decoration: none;
-  border-bottom: 1px solid var(--gsc-accent-text);
-  transition: all 0.2s ease;
+.markdown-body a {
+    color: var(--gsc-accent-text);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition: all 0.2s ease;
 }
-.markdown a:hover {
-  background-color: var(--gsc-accent-text);
-  color: var(--gsc-button-primary-text);
+.markdown-body a:hover {
+    background-color: var(--gsc-accent-text);
+    color: var(--gsc-button-primary-text);
+    border-bottom-color: transparent;
 }
-.markdown pre {
-  background-color: var(--gsc-hover-bg) !important;
+.markdown-body pre {
+    background-color: var(--gsc-hover-bg) !important;
+    border-radius: 8px;
+    border: 1px dotted var(--gsc-border-color);
+}
+.markdown-body blockquote {
+    border-left: 3px solid var(--gsc-accent-text);
+    color: var(--gsc-secondary-text);
 }
 
 /* --- Reactions --- */
+.gsc-reactions-button {
+    border-radius: 16px !important;
+    font-size: 1rem;
+    padding: 0.25rem 0.75rem !important;
+    border-color: var(--gsc-border-color) !important;
+}
+.gsc-reactions-button:hover {
+    border-color: var(--gsc-accent-text) !important;
+}
 .gsc-social-reaction-summary-item {
-  border-radius: 16px;
-  padding: 0.25rem 0.75rem;
-  background-color: transparent;
-  color: var(--gsc-secondary-text);
-  transition: all 0.3s ease;
+    border-radius: 16px;
+    padding: 0.25rem 0.75rem;
+    background-color: transparent;
+    color: var(--gsc-secondary-text);
+    border: 1px solid var(--gsc-border-color);
+    transition: all 0.3s ease;
 }
 .gsc-social-reaction-summary-item:hover:enabled {
-  border-color: var(--gsc-accent-text);
-  color: var(--gsc-accent-text);
-  background-color: var(--gsc-hover-bg);
+    border-color: var(--gsc-accent-text);
+    color: var(--gsc-accent-text);
+    background-color: var(--gsc-hover-bg);
 }
-.gsc-social-reaction-summary-item.has-reacted {
-  border-color: var(--gsc-accent-text) !important;
-  background: var(--gsc-hover-bg) !important;
-  color: var(--gsc-accent-text) !important;
+.gsc-social-reaction-summary-item[aria-pressed="true"] {
+    border-color: var(--gsc-accent-text) !important;
+    background: var(--gsc-hover-bg) !important;
+    color: var(--gsc-accent-text) !important;
 }
 
 /* --- Timeline & Separators --- */
-.gsc-tl-line { background-color: var(--gsc-border-color); }
-.gsc-timeline::before { background-color: var(--gsc-border-color); }
+.gsc-timeline {
+    padding: 0;
+    margin-top: 2rem;
+}
+.gsc-timeline::before {
+    display: none;
+}
+.gsc-tl-line {
+    background-color: transparent;
+    width: 1px;
+    border-left: 1px dotted var(--gsc-border-color);
+}
 
 /* --- Loading State --- */
 .gsc-loading-image { display: none; }
 .gsc-loading::before {
-  content: '...';
-  display: block;
-  font-family: var(--font-header-main);
-  font-size: 3rem;
-  color: var(--gsc-accent-text);
-  text-align: center;
-  animation: gsc-loading-pulse 1.5s infinite ease-in-out;
+    content: '...';
+    display: block;
+    font-family: var(--font-header-main);
+    font-size: 3rem;
+    color: var(--gsc-accent-text);
+    text-align: center;
+    animation: gsc-loading-pulse 1.5s infinite ease-in-out;
 }
 @keyframes gsc-loading-pulse {
-  0% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.7; }
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
 }
 .gsc-loading-text {
-  font-family: var(--font-tagline);
-  color: var(--gsc-secondary-text);
+    font-family: var(--font-tagline);
+    color: var(--gsc-secondary-text);
 }
