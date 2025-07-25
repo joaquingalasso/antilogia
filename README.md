@@ -9,7 +9,7 @@ Esta es una aplicación web de una antología digital de cuentos, diseñada para
 - **Galería de Historias Interactiva**: Visualiza las historias en una vista de mosaico o de lista.
 - **Navegación Avanzada**: Filtra historias por categoría o etiqueta, ordénalas por fecha o busca por texto.
 - **Contenido Multimedia Enriquecido**: Las entradas pueden incluir audio, video (YouTube o local), imágenes, galerías y fragmentos de código.
-- **Contenido Interactivo**: Soporte para hipervínculos, tooltips y previsualización de enlaces generada por IA.
+- **Contenido Interactivo**: Soporte para hipervínculos, tooltips y previsualización de enlaces.
 - **Internacionalización**: Soporte para múltiples idiomas (actualmente español e inglés).
 
 ## Cómo Añadir Contenido
@@ -169,14 +169,17 @@ Usa el ID del video de la URL de YouTube (`https://www.youtube.com/watch?v=VIDEO
 
 ---
 
-### Previsualización de Enlace (AI)
+### Previsualización de Enlace
 
-Genera una tarjeta de previsualización para cualquier URL, similar a las que se ven en redes sociales. Utiliza la API de Gemini y la búsqueda de Google para obtener el título, la descripción y la imagen de la página.
+Muestra una tarjeta de previsualización para cualquier URL, similar a las que se ven en redes sociales. El título, la descripción y la imagen deben proporcionarse manualmente.
 
 ```javascript
 {
   type: 'linkPreview',
-  url: 'https://es.wikipedia.org/wiki/Faro'
+  url: 'https://es.wikipedia.org/wiki/Faro',
+  title: 'Faro - Wikipedia',
+  description: 'Un faro es una torre de señalización luminosa situada cerca de la costa para guiar a las embarcaciones.',
+  image: 'https://.../faro.jpg'
 }
 ```
 

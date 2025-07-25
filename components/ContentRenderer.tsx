@@ -111,7 +111,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
         }
         
         case 'linkPreview':
-            return <LinkPreview key={index} url={block.url} />;
+            return <LinkPreview key={index} {...block} />;
 
         default:
             return null;

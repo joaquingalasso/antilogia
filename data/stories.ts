@@ -108,7 +108,10 @@ setInterval(() => listenToTheSea(farero), 1000 * 60 * 60);
   },
   {
     type: 'linkPreview',
-    url: 'https://es.wikipedia.org/wiki/Faro'
+    url: 'https://es.wikipedia.org/wiki/Faro',
+    title: 'Faro - Wikipedia, la enciclopedia libre',
+    description: 'Un faro es una torre de señalización luminosa situada en la costa, en las entradas de los puertos, en las islas, en los arrecifes o en los bancos de arena para guiar a las embarcaciones durante la noche.',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/BCN_-_Far_del_Llobregat_1.jpg/1280px-BCN_-_Far_del_Llobregat_1.jpg'
   },
   {
     type: 'audio',

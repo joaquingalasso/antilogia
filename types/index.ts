@@ -18,7 +18,13 @@ export interface AudioBlock extends BaseBlock { type: 'audio'; src: string; titl
 export interface CodeBlock extends BaseBlock { type: 'code'; language: string; code: string; }
 
 // Interactive block types
-export interface LinkPreviewBlock { type: 'linkPreview'; url: string; }
+export interface LinkPreviewBlock {
+  type: 'linkPreview';
+  url: string;
+  title: string;
+  description: string;
+  image: string;
+}
 
 
 // Decorative block type
