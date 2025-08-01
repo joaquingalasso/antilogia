@@ -1,6 +1,6 @@
+
 import * as React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { LanguageToggle } from './LanguageToggle';
 import { StoryDetailsMobile } from './StoryDetailsMobile';
 import { ContentRenderer } from './ContentRenderer';
 import { ShareButtons } from './ShareButtons';
@@ -23,8 +23,13 @@ export const StoryView = ({ story, onBack, isVisible, allStories, onSelectStory,
   if (!story) return null;
   
   const storyUrl = `${window.location.origin}${window.location.pathname}#/story/${story.id}`;
+  
   const headerStyle = {
-    '--story-icon-url': `url("${story.icon}")`
+    '--story-icon-url': `url("${story.backgrounds.storyHeader}")`
+  } as React.CSSProperties;
+
+  const sharingStyle = {
+    '--sharing-area-bg-url': `url("${story.backgrounds.sharingArea}")`
   } as React.CSSProperties;
 
   const date = new Date(story.date);
@@ -39,7 +44,6 @@ export const StoryView = ({ story, onBack, isVisible, allStories, onSelectStory,
           <button onClick={onBack} className="back-button">
             ← {t('backToAnthology')}
           </button>
-          <LanguageToggle />
       </div>
 
       <header className="story-header" style={headerStyle}>
@@ -51,7 +55,7 @@ export const StoryView = ({ story, onBack, isVisible, allStories, onSelectStory,
       
       <ContentRenderer content={story.content} />
 
-      <div className="story-sharing-area" style={headerStyle}>
+      <div className="story-sharing-area" style={sharingStyle}>
         <ShareButtons storyUrl={storyUrl} title={story.title} />
         <RelatedStoriesMobile currentStory={story} allStories={allStories} onSelectStory={onSelectStory} />
       </div>

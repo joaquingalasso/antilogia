@@ -2,8 +2,10 @@ import * as React from 'react';
 import type { ContentBlock, OrnamentBlock } from '../types';
 import { CustomAudioPlayer } from './CustomAudioPlayer';
 import { LinkPreview } from './LinkPreview';
+import { Collapsible } from './Collapsible';
+import { Timeline } from './Timeline';
 
-const renderBlock = (block: ContentBlock, index: number) => {
+export const renderBlock = (block: ContentBlock, index: number) => {
     switch (block.type) {
         case 'paragraph':
             return <p key={index} dangerouslySetInnerHTML={{ __html: block.html }} />;
@@ -77,6 +79,49 @@ const renderBlock = (block: ContentBlock, index: number) => {
                 </figure>
             );
         
+        case 'table':
+            return (
+                <figure key={index} className="content-figure table-figure">
+                    <div className="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    {block.headers.map((header, hIndex) => (
+                                        <th key={hIndex} dangerouslySetInnerHTML={{ __html: header }} />
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {block.rows.map((row, rIndex) => (
+                                    <tr key={rIndex}>
+                                        {row.map((cell, cIndex) => (
+                                            <td key={cIndex} dangerouslySetInnerHTML={{ __html: cell }} />
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    {block.caption && <figcaption>{block.caption}</figcaption>}
+                </figure>
+            );
+
+        case 'sourcedQuote':
+            return (
+                <figure key={index} className="sourced-quote">
+                    <blockquote dangerouslySetInnerHTML={{ __html: block.html }} />
+                    <figcaption>
+                        — {block.sourceUrl ? (
+                            <a href={block.sourceUrl} target="_blank" rel="noopener noreferrer">
+                                {block.source}
+                            </a>
+                        ) : (
+                            block.source
+                        )}
+                    </figcaption>
+                </figure>
+            );
+
         case 'ornament': {
             const { variant = 'default', value, caption } = block as OrnamentBlock;
 
@@ -85,9 +130,6 @@ const renderBlock = (block: ContentBlock, index: number) => {
                     case 'character':
                         return <span>{value}</span>;
                     case 'svg':
-                        if (value?.endsWith('.svg')) {
-                            return <span className="ornament-svg" style={{ maskImage: `url(${value})`, WebkitMaskImage: `url(${value})` }}></span>;
-                        }
                         return <span className="ornament-svg" dangerouslySetInnerHTML={{ __html: value || '' }} />;
                     case 'default':
                     default:
@@ -115,6 +157,26 @@ const renderBlock = (block: ContentBlock, index: number) => {
         
         case 'linkPreview':
             return <LinkPreview key={index} {...block} />;
+
+        case 'pullQuote':
+            return (
+                <blockquote
+                    key={index}
+                    className={`pull-quote align-${block.alignment || 'full'}`}
+                    dangerouslySetInnerHTML={{ __html: block.html }}
+                />
+            );
+        
+        case 'sidenote':
+            return (
+                 <aside key={index} className="sidenote" dangerouslySetInnerHTML={{ __html: block.html }} />
+            );
+
+        case 'collapsible':
+            return <Collapsible key={index} {...block} />;
+
+        case 'timeline':
+            return <Timeline key={index} {...block} />;
 
         default:
             return null;

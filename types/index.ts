@@ -16,6 +16,7 @@ export interface ImageGalleryBlock extends BaseBlock { type: 'gallery'; images: 
 export interface VideoBlock extends BaseBlock { type: 'video'; provider: 'youtube' | 'local'; src: string; }
 export interface AudioBlock extends BaseBlock { type: 'audio'; src: string; title: string; }
 export interface CodeBlock extends BaseBlock { type: 'code'; language: string; code: string; }
+export interface TableBlock extends BaseBlock { type: 'table'; headers: string[]; rows: string[][]; }
 
 // Interactive block types
 export interface LinkPreviewBlock {
@@ -26,6 +27,41 @@ export interface LinkPreviewBlock {
   image: string;
 }
 
+export interface SourcedQuoteBlock extends BaseBlock {
+  type: 'sourcedQuote';
+  html: string;
+  source: string;
+  sourceUrl?: string;
+}
+
+// New feature block types
+export interface PullQuoteBlock {
+  type: 'pullQuote';
+  html: string;
+  alignment?: 'left' | 'right' | 'full';
+}
+
+export interface SidenoteBlock {
+  type: 'sidenote';
+  html: string;
+}
+
+export interface CollapsibleBlock {
+  type: 'collapsible';
+  title: string;
+  initiallyOpen?: boolean;
+  content: ContentBlock[];
+}
+
+export interface TimelineEvent {
+  date: string;
+  title: string;
+  description: string;
+}
+export interface TimelineBlock {
+  type: 'timeline';
+  events: TimelineEvent[];
+}
 
 // Decorative block type
 export interface OrnamentBlock extends BaseBlock {
@@ -46,8 +82,14 @@ export type ContentBlock =
   | VideoBlock
   | AudioBlock
   | CodeBlock
+  | TableBlock
+  | SourcedQuoteBlock
   | OrnamentBlock
-  | LinkPreviewBlock;
+  | LinkPreviewBlock
+  | PullQuoteBlock
+  | SidenoteBlock
+  | CollapsibleBlock
+  | TimelineBlock;
 
 // Main Story interface
 export interface Story {
@@ -59,7 +101,11 @@ export interface Story {
     light: string;
     dark: string;
   };
-  icon: string;
+  backgrounds: {
+    cardIcon: string;
+    storyHeader: string;
+    sharingArea: string;
+  };
   ornament: OrnamentBlock;
   content: ContentBlock[]; // Changed from string to ContentBlock[]
   category: string;

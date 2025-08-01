@@ -9,6 +9,12 @@ interface FilterAsideProps {
     activeTag: string;
     onTagChange: (tag: string) => void;
     tags: { tag: string; count: number }[];
+    archives: { key: string; year: number; month: string; count: number }[];
+    activeArchive: string;
+    onArchiveChange: (key:string) => void;
+    selectedArchiveYear: number | null;
+    availableArchiveYears: number[];
+    onArchiveYearChange: (direction: 'next' | 'prev') => void;
 }
 
 interface MobileFilterPanelProps extends FilterAsideProps {

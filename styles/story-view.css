@@ -1,13 +1,14 @@
+
+
 /* --- Story View --- */
 .story-view { max-width: 800px; margin: 0 auto; }
 .story-view-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
 }
 .story-view .back-button {
-    margin-bottom: 0;
+    margin-bottom: 1.25rem;
 }
 .story-header { margin-bottom: 3rem; padding-bottom: 2rem; position: relative; }
 .story-header::before {
@@ -45,6 +46,13 @@
     flex-direction: column;
     gap: 0.25rem;
 }
+
+.story-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 /* 
   Removed the generic max-width rule to allow content to span the full width of the container.
@@ -190,7 +198,7 @@
     background-size: 10px 1px;
     background-repeat: repeat-x;
 }
-.cul-de-lampe > span {
+.cul-de-lampe span {
     font-size: 1.75rem;
     line-height: 1;
     color: var(--dominant-color);
@@ -199,36 +207,14 @@
     transition: color 0.5s var(--ease-out-quart);
     display: inline-block;
 }
-.cul-de-lampe > span:not(.ornament-svg):empty::before {
+.cul-de-lampe span:not(.ornament-svg):empty::before {
     content: var(--cul-de-lampe);
 }
 
-/* Container for ornament, either inline or external */
-.cul-de-lampe .ornament-svg {
-    display: inline-block;
-    height: 1.75rem; /* Match font-size of default ornament */
-    width: 6rem; /* A reasonable default width */
-    vertical-align: middle;
-}
-
-/* For file-based SVGs using mask-image */
-.cul-de-lampe .ornament-svg[style*="mask-image"] {
-    background-color: var(--dominant-color);
-    transition: background-color 0.5s var(--ease-out-quart);
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-}
-
-/* For inline SVGs */
 .cul-de-lampe .ornament-svg svg {
     display: block;
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+    width: auto;
+    height: 1.75rem; /* Match font-size of default ornament */
     fill: var(--dominant-color);
     transition: fill 0.5s var(--ease-out-quart);
 }
@@ -255,8 +241,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    -webkit-mask-image: var(--story-icon-url);
-    mask-image: var(--story-icon-url);
+    -webkit-mask-image: var(--sharing-area-bg-url);
+    mask-image: var(--sharing-area-bg-url);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: center;

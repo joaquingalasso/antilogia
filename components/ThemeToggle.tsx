@@ -17,7 +17,7 @@ export const ThemeToggle = ({ theme, toggleTheme }: ThemeToggleProps) => {
             aria-label={label}
             title={label}
         >
-            {theme === 'light' ? '🌑' : '☀️'}
+            <span className={`theme-toggle-icon ${theme}`}></span>
         </button>
     );
 };

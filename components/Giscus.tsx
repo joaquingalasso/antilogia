@@ -9,8 +9,6 @@ interface GiscusProps {
     lang: string;
 }
 
-// IMPORTANT: Replace these values with your repository's details from Giscus.app
-// You can get these from https://giscus.app
 const GISCUS_CONFIG = {
     repo: "joaquingalasso/antilogia",
     repoId: "R_kgDOPSlhsQ",
@@ -21,14 +19,10 @@ const GISCUS_CONFIG = {
 export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    // This effect handles the Giscus script injection and re-creation
-    // when the story or language changes. It also sets the initial theme.
+    // Montar el script sólo cuando cambia el storyId o lang
     useEffect(() => {
-        if (!ref.current || !storyId) {
-            return;
-        }
+        if (!ref.current) return;
 
-        // Clean up previous Giscus instance
         ref.current.innerHTML = '';
 
         const script = document.createElement('script');
@@ -48,13 +42,65 @@ export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
         script.setAttribute('data-input-position', 'top');
         script.setAttribute('data-lang', lang);
         script.setAttribute('data-loading', 'lazy');
-        
-        // Use the built-in themes which will be styled by the custom CSS file
-        script.setAttribute('data-theme', theme);
+
+        // Usar el JSON de tema personalizado desde tu dominio local o producción
+        const themeUrl = `${window.location.origin}${theme === 'dark'
+            ? '/giscus-theme-dark.json'
+            : '/giscus-theme-light.json'
+        }`;
+        script.setAttribute('data-theme', themeUrl);
 
         ref.current.appendChild(script);
+    }, [storyId, lang]); // theme se maneja aparte con postMessage
 
-    }, [storyId, lang, theme]); // Re-create script if essential props change
+    // Sincronizar theme dinámicamente usando postMessage
+    useEffect(() => {
+        const sendThemeToGiscus = (newTheme: Theme) => {
+            const iframe = ref.current?.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+            if (iframe) {
+                const themeUrl = `${window.location.origin}${newTheme === 'dark'
+                    ? '/giscus-theme-dark.json'
+                    : '/giscus-theme-light.json'
+                }`;
+
+                const postTheme = () => {
+                    iframe.contentWindow?.postMessage(
+                        { giscus: { setConfig: { theme: themeUrl } } },
+                        'https://giscus.app'
+                    );
+                };
+
+                // Esperar a que el iframe cargue antes de enviar el mensaje
+                if (iframe.contentWindow) {
+                    iframe.addEventListener('load', postTheme, { once: true });
+                } else {
+                    postTheme();
+                }
+            }
+        };
+
+        const iframe = ref.current?.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+        if (iframe) {
+            sendThemeToGiscus(theme);
+        } else {
+            // Si el iframe aún no se ha cargado, observar el contenedor.
+            const observer = new MutationObserver((mutations) => {
+                for (const mutation of mutations) {
+                    for (const node of Array.from(mutation.addedNodes)) {
+                        if (node instanceof HTMLIFrameElement && node.classList.contains('giscus-frame')) {
+                            sendThemeToGiscus(theme);
+                            observer.disconnect();
+                            return;
+                        }
+                    }
+                }
+            });
+            if (ref.current) {
+                observer.observe(ref.current, { childList: true });
+            }
+            return () => observer.disconnect();
+        }
+    }, [theme]);
 
     return <div ref={ref} className="giscus" />;
 };

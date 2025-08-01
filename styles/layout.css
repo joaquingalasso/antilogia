@@ -1,17 +1,26 @@
 /* --- Layout --- */
 .app-container {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-        "content aside"
-        "footer footer";
-    gap: 0 4rem;
+    display: flex;
+    flex-direction: column;
     padding: 2rem clamp(2rem, 6vw, 6rem); /* Responsive horizontal padding */
     width: 100%;
     max-width: 1440px; /* Reduced max-width for better proportions */
     margin: 0 auto;
     flex-grow: 1;
+}
+
+.main-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    grid-template-areas: "content aside";
+    gap: 0 4rem;
+    flex-grow: 1;
+}
+
+.main-layout-grid.view-about {
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    gap: 0;
 }
 
 .content-area {
@@ -22,7 +31,6 @@
 
 /* --- Footer --- */
 .site-footer {
-    grid-area: footer;
     padding: 2rem;
     margin-top: 4rem;
     background-color: var(--dominant-color);
@@ -98,4 +106,14 @@
 }
 .rss-button-footer:hover {
     opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .app-container {
+        padding: 1rem;
+    }
+    .main-layout-grid {
+        display: block;
+        gap: 0;
+    }
 }

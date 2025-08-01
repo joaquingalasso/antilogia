@@ -6,6 +6,7 @@ Esta es una aplicación web de una antología digital de cuentos, diseñada para
 
 - **Diseño Responsive**: Se adapta a cualquier tamaño de pantalla, desde móviles hasta ordenadores de escritorio.
 - **Temas Personalizables**: Cambia entre un tema claro y uno oscuro para una lectura cómoda en cualquier entorno.
+- **Página "Quién Soy"**: Una sección dedicada a presentar al autor, su trayectoria y proyectos.
 - **Galería de Historias Interactiva**: Visualiza las historias en una vista de mosaico o de lista.
 - **Navegación Avanzada**: Filtra historias por categoría o etiqueta, ordénalas por fecha o busca por texto.
 - **Contenido Multimedia Enriquecido**: Las entradas pueden incluir audio, video (YouTube o local), imágenes, galerías y fragmentos de código.
@@ -15,6 +16,8 @@ Esta es una aplicación web de una antología digital de cuentos, diseñada para
 ## Cómo Añadir Contenido
 
 Las historias se gestionan en el archivo `data/stories.ts`. Para añadir o modificar contenido, es necesario entender la estructura de bloques. Cada historia tiene una propiedad `content` que es un array de `ContentBlock`.
+
+La información de la página "Quién Soy" se gestiona en `data/about.ts`.
 
 ### Estructura de Bloques de Contenido
 
@@ -139,6 +142,39 @@ Para mostrar una serie de imágenes en un mosaico.
 
 ---
 
+### Tabla
+
+Para mostrar datos tabulares. Admite `<strong>`, `<em>` y otras etiquetas HTML en las celdas. La tabla es responsive y permite el desplazamiento horizontal en pantallas pequeñas.
+
+```javascript
+{
+  type: 'table',
+  headers: ['Encabezado 1', 'Encabezado 2', 'Encabezado 3'],
+  rows: [
+    ['Fila 1, Celda 1', 'Fila 1, Celda 2', 'Fila 1, Celda 3'],
+    ['Fila 2, Celda 1', 'Fila 2, Celda 2', 'Fila 2, Celda 3']
+  ],
+  caption: 'Un epígrafe opcional para la tabla.'
+}
+```
+
+---
+
+### Cita con Fuente
+
+Para citas textuales que requieren una atribución. La cita se envuelve en comillas latinas (« ») y la fuente puede incluir opcionalmente un hipervínculo.
+
+```javascript
+{
+  type: 'sourcedQuote',
+  html: 'La soledad es al espíritu lo que la dieta al cuerpo.',
+  source: 'Vauvenargues',
+  sourceUrl: 'https://es.wikipedia.org/wiki/Luc_de_Clapiers' // Opcional
+}
+```
+
+---
+
 ### Video
 
 Soporta videos locales (dentro de la carpeta `/public`) y de YouTube.
@@ -171,7 +207,7 @@ Usa el ID del video de la URL de YouTube (`https://www.youtube.com/watch?v=VIDEO
 
 ### Previsualización de Enlace
 
-Muestra una tarjeta de previsualización para cualquier URL, similar a las que se ven en redes sociales. El título, la descripción y la imagen deben proporcionarse manualmente.
+Muestra una tarjeta de previsualización para cualquier URL, similar a las que se ven en redes sociales. El título, la descripción y la imagen deben proporcionarse manually.
 
 ```javascript
 {

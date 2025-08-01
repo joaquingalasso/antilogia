@@ -1,0 +1,201 @@
+/* --- Featured Stories Carousel --- */
+:root {
+    --carousel-item-size: 52px;
+    --carousel-gap: 1.5rem; /* 24px */
+}
+
+.featured-stories-wrapper {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.featured-carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    width: 100%;
+}
+
+.carousel-viewport {
+    flex-grow: 1;
+    height: 90px; /* Generous height to contain scaled items */
+    overflow: hidden;
+    position: relative;
+    /* Fade out items at the edges using a mask */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent 100%);
+}
+
+.featured-stories-list {
+    display: flex;
+    align-items: center;
+    gap: var(--carousel-gap);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    /* This calculates the necessary offset to center the active item. */
+    transform: translateX(calc(50% - (var(--carousel-item-size) / 2) - (var(--active-index) * (var(--carousel-item-size) + var(--carousel-gap)))));
+    /* The transition property is now handled inline in the component for the infinite loop logic */
+}
+
+.featured-story-item {
+    width: var(--carousel-item-size);
+    height: var(--carousel-item-size);
+    flex-shrink: 0; /* Prevent items from shrinking */
+    border-radius: 12px; /* Changed from 50% to match grid view cards */
+    border: 2px solid var(--featured-color);
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Default state for non-active items */
+    transform: scale(0.8);
+    opacity: 0.7;
+    transition: all 0.6s var(--ease-out-quart);
+}
+
+.featured-stories-list.no-transition .featured-story-item {
+    transition: none;
+}
+
+.featured-story-item::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 8px; /* Slightly smaller radius for the inner icon bg */
+    background-color: var(--featured-color);
+    -webkit-mask-image: var(--featured-icon-url);
+    mask-image: var(--featured-icon-url);
+    -webkit-mask-size: 60%;
+    mask-size: 60%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    transition: background-color 0.4s var(--ease-out-quart), inset 0.4s var(--ease-out-quart);
+}
+
+/* Active and Hover states */
+.featured-story-item:hover {
+    opacity: 1;
+}
+
+.featured-story-item.active {
+    transform: scale(1.15);
+    opacity: 1;
+    background-color: var(--featured-color);
+}
+
+.featured-story-item.active::before {
+    background-color: var(--bg-color);
+    inset: 3px;
+}
+
+/* Navigation Arrows */
+.carousel-arrow {
+    background-color: transparent;
+    border: 1px solid var(--outline-color);
+    color: var(--gray-details);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-arrow:hover {
+    border-color: var(--dominant-color);
+    color: var(--dominant-color);
+    transform: scale(1.1);
+}
+
+.carousel-arrow.prev-arrow svg {
+    transform: rotate(180deg);
+}
+
+/* Title Display */
+.featured-story-title-container {
+    text-align: center;
+    margin-top: 1rem;
+    height: 3.2em; /* Increased height for title and category */
+    line-height: 1.5;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-story-info {
+    position: absolute;
+    display: flex;
+    flex-direction: column; /* Mobile first */
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    width: 100%;
+    animation: title-fade-in 0.5s ease-out;
+}
+
+.featured-story-title {
+    font-family: var(--font-header-sub);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.featured-story-category {
+    font-family: var(--font-details);
+    font-size: 0.9rem;
+    color: var(--gray-details);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+@keyframes title-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 900px) {
+    .featured-carousel-container {
+        gap: 0.25rem;
+    }
+     .carousel-viewport {
+        /* On smaller screens, allow a bit more of the side items to be visible */
+        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent 100%);
+    }
+}
+
+/* --- Desktop Layout for Title/Category --- */
+@media (min-width: 901px) {
+    .featured-story-info {
+        flex-direction: row; /* Side-by-side on desktop */
+        align-items: baseline;
+        gap: 0.75rem;
+    }
+}
