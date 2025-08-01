@@ -1248,7 +1248,7 @@ var Giscus = ({ storyId, theme, lang }) => {
     script.setAttribute("data-input-position", "top");
     script.setAttribute("data-lang", lang);
     script.setAttribute("data-loading", "lazy");
-    const themeUrl = `${window.location.origin}${theme === "dark" ? "/giscus-theme-dark.json" : "/giscus-theme-light.json"}`;
+    const themeUrl = `${window.location.origin}/giscus-theme.css`;
     script.setAttribute("data-theme", themeUrl);
     ref.current.appendChild(script);
   }, [storyId, lang]);
@@ -1256,10 +1256,14 @@ var Giscus = ({ storyId, theme, lang }) => {
     const sendThemeToGiscus = (newTheme) => {
       const iframe2 = ref.current?.querySelector("iframe.giscus-frame");
       if (iframe2) {
-        const themeUrl = `${window.location.origin}${newTheme === "dark" ? "/giscus-theme-dark.json" : "/giscus-theme-light.json"}`;
+        const themeUrl = `${window.location.origin}/giscus-theme.css`;
         const postTheme = () => {
           iframe2.contentWindow?.postMessage(
             { giscus: { setConfig: { theme: themeUrl } } },
+            "https://giscus.app"
+          );
+          iframe2.contentWindow?.postMessage(
+            { giscus: { setConfig: { theme: themeUrl, "data-theme": newTheme } } },
             "https://giscus.app"
           );
         };
@@ -1285,9 +1289,7 @@ var Giscus = ({ storyId, theme, lang }) => {
           }
         }
       });
-      if (ref.current) {
-        observer.observe(ref.current, { childList: true });
-      }
+      if (ref.current) observer.observe(ref.current, { childList: true });
       return () => observer.disconnect();
     }
   }, [theme]);

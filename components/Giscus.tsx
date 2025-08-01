@@ -43,11 +43,8 @@ export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
         script.setAttribute('data-lang', lang);
         script.setAttribute('data-loading', 'lazy');
 
-        // Usar el JSON de tema personalizado desde tu dominio local o producción
-        const themeUrl = `${window.location.origin}${theme === 'dark'
-            ? '/giscus-theme-dark.json'
-            : '/giscus-theme-light.json'
-        }`;
+        // Usar directamente el CSS personalizado
+        const themeUrl = `${window.location.origin}/giscus-theme.css`;
         script.setAttribute('data-theme', themeUrl);
 
         ref.current.appendChild(script);
@@ -58,19 +55,21 @@ export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
         const sendThemeToGiscus = (newTheme: Theme) => {
             const iframe = ref.current?.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
             if (iframe) {
-                const themeUrl = `${window.location.origin}${newTheme === 'dark'
-                    ? '/giscus-theme-dark.json'
-                    : '/giscus-theme-light.json'
-                }`;
+                const themeUrl = `${window.location.origin}/giscus-theme.css`;
 
                 const postTheme = () => {
                     iframe.contentWindow?.postMessage(
                         { giscus: { setConfig: { theme: themeUrl } } },
                         'https://giscus.app'
                     );
+
+                    // Enviar también el atributo data-theme interno
+                    iframe.contentWindow?.postMessage(
+                        { giscus: { setConfig: { theme: themeUrl, "data-theme": newTheme } } },
+                        'https://giscus.app'
+                    );
                 };
 
-                // Esperar a que el iframe cargue antes de enviar el mensaje
                 if (iframe.contentWindow) {
                     iframe.addEventListener('load', postTheme, { once: true });
                 } else {
@@ -83,7 +82,6 @@ export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
         if (iframe) {
             sendThemeToGiscus(theme);
         } else {
-            // Si el iframe aún no se ha cargado, observar el contenedor.
             const observer = new MutationObserver((mutations) => {
                 for (const mutation of mutations) {
                     for (const node of Array.from(mutation.addedNodes)) {
@@ -95,9 +93,7 @@ export const Giscus = ({ storyId, theme, lang }: GiscusProps) => {
                     }
                 }
             });
-            if (ref.current) {
-                observer.observe(ref.current, { childList: true });
-            }
+            if (ref.current) observer.observe(ref.current, { childList: true });
             return () => observer.disconnect();
         }
     }, [theme]);
