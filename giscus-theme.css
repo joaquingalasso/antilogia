@@ -223,11 +223,6 @@
   border: 1px solid transparent;
   color: var(--gsc-secondary-text);
   transition: all 0.3s ease;
-  display: inline-flex !important; /* Asegura alineación controlada */
-  align-items: center !important; /* Centra verticalmente emoji y texto */
-  justify-content: center;
-  line-height: 1.2 !important; /* Evita line-heights raros */
-  gap: 0.25rem; /* Espacio entre emoji y número si lo hay */
 }
 .gsc-social-reaction-summary-item:hover:enabled {
   border-color: var(--gsc-accent-text);
@@ -262,4 +257,29 @@
 .gsc-loading-text {
   font-family: var(--font-tagline);
   color: var(--gsc-secondary-text);
+}
+
+.gsc-social-reaction-summary-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  gap: 0.25rem !important;
+  vertical-align: middle !important;
+}
+
+.gsc-social-reaction-summary-item .gsc-social-reaction-summary-item-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1rem; /* Ajustá si querés que el emoji sea más grande o más chico */
+  line-height: 1 !important;
+  position: relative;
+  top: 0; /* Forzamos a eliminar cualquier desplazamiento */
+}
+
+.gsc-social-reaction-summary-item .gsc-social-reaction-summary-item-count {
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
 }
