@@ -1,0 +1,334 @@
+/* --- Filter Aside (Desktop) --- */
+.filter-aside {
+    grid-area: aside;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+.mobile-filter-content .filter-aside {
+    height: auto;
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+}
+.filter-group { 
+    margin-top: 2rem; 
+}
+.filter-aside .filter-group:first-child {
+    margin-top: 0;
+}
+.filter-group h3 {
+    font-family: var(--font-details); text-transform: uppercase; color: var(--gray-details);
+    letter-spacing: 0.1em; font-size: 0.9rem; margin-bottom: 1rem;
+}
+.filter-group button {
+    width: 100%; text-align: left; padding: 0.25rem 0.5rem;
+    background: transparent; border: none; color: var(--text-color);
+    font-family: var(--font-header-sub); font-size: 1.1rem; cursor: pointer;
+    border-radius: 6px; transition: all 0.3s ease; margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter-group button:hover { background-color: var(--hover-bg-color); }
+.filter-group button.active { font-weight: 600; color: var(--dominant-color); }
+
+/* Style for the tags container in the filter sidebar */
+.tags-list-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tags-list-filter .tag-filter-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-family: var(--font-details);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.8rem;
+    border-radius: 16px; /* Pill shape */
+    background-color: transparent;
+    border: 1px solid var(--outline-color);
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s var(--ease-out-quart), background-color 0.3s ease;
+    width: auto;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.tags-list-filter .tag-filter-item:hover {
+    border-color: var(--dominant-color);
+    transform: translateY(-2px);
+    background-color: var(--hover-bg-color);
+}
+
+.tags-list-filter .tag-filter-item.active {
+    background-color: var(--dominant-color);
+    color: var(--bg-color);
+    border-color: var(--dominant-color);
+}
+
+.tags-list-filter .tag-filter-item .tag-count {
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    color: var(--gray-details);
+    font-size: inherit;
+    font-family: inherit;
+    transition: none;
+}
+
+.tags-list-filter .tag-filter-item .tag-name {
+    line-height: 1; 
+    font-weight: 400;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.tags-list-filter .tag-filter-item:hover .tag-name {
+    color: var(--dominant-color);
+}
+
+.tags-list-filter .tag-filter-item.active .tag-name,
+.tags-list-filter .tag-filter-item.active .tag-count {
+    color: var(--bg-color);
+}
+
+.tags-list-filter .tag-filter-item.active .tag-name {
+    font-weight: 400;
+}
+
+
+/* --- Archive Year Selector --- */
+.archive-year-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem; /* Tighter gap for a more compact look */
+    margin-bottom: 1rem;
+    padding: 0;
+}
+.year-nav-button {
+    background: transparent;
+    border: none;
+    color: var(--gray-details);
+    font-size: 0.8rem !important; /* Smaller arrow to fit */
+    cursor: pointer;
+    padding: 0;
+    height: 24px !important; /* More compact, fixed height */
+    border-radius: 50%; /* Circular button */
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 0 !important;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    
+}
+.year-nav-button:hover:not(:disabled) {
+    color: var(--dominant-color);
+    background-color: var(--hover-bg-color);
+}
+.year-nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.current-year {
+    font-family: var(--font-header-sub);
+    color: var(--text-color);
+    font-size: 1.1rem; /* Make the year the focal point */
+    font-weight: 600;
+    min-width: 5ch; /* Ensure stable width for centering */
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
+
+/* --- Archive List --- */
+.archive-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.archive-list .archive-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start; /* Override generic filter button style */
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: normal;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px; /* Rectangular pill */
+    background-color: transparent;
+    border: 1px solid var(--outline-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out-quart), background-color 0.3s ease;
+    width: auto;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.archive-list .archive-item:hover {
+    color: var(--dominant-color);
+    border-color: var(--dominant-color);
+    transform: translateY(-2px);
+    background-color: var(--hover-bg-color);
+}
+
+.archive-list .archive-item.active {
+    background-color: var(--dominant-color);
+    color: var(--bg-color);
+    border-color: var(--dominant-color);
+    transform: translateY(0);
+}
+
+.archive-list .archive-date {
+    font-family: inherit;
+    font-weight: 400;
+}
+
+.archive-list .archive-item .archive-count {
+    font-family: var(--font-details);
+    font-size: 0.8rem;
+    color: var(--gray-details);
+    background-color: var(--hover-bg-color);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    min-width: auto;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.archive-list .archive-item:hover .archive-count {
+    color: var(--gray-details);
+}
+
+.archive-list .archive-item.active .archive-count {
+    background-color: var(--bg-color);
+    color: var(--dominant-color);
+}
+
+
+/* --- Story Aside (Desktop) --- */
+.story-aside {
+    grid-area: aside;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: visible;
+    overflow-x: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+.story-aside > div > h3 {
+    font-family: var(--font-details);
+    text-transform: uppercase;
+    color: var(--gray-details);
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px dotted var(--outline-color);
+}
+.story-details-group p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.story-details-group p {
+    margin-bottom: 0;
+}
+.story-details-group strong {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 0.5rem;
+}
+.story-details-group a {
+    color: var(--dominant-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.2s ease;
+}
+.story-details-group a:hover {
+    border-bottom-color: currentColor;
+}
+.story-details-tags {
+    margin-top: 1.5rem;
+}
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.tag-item {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    background-color: var(--hover-bg-color);
+    border: 1px solid var(--outline-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out-quart);
+}
+.tag-item:hover {
+    background-color: var(--dominant-color);
+    color: var(--bg-color);
+    border-color: var(--dominant-color);
+    transform: translateY(-2px);
+}
+.related-stories-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.related-story-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.related-story-button:hover {
+    background-color: var(--hover-bg-color);
+    transform: translateX(4px);
+}
+.related-story-title {
+    display: block;
+    font-family: var(--font-header-sub);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    transition: color 0.3s ease;
+}
+.related-story-button:hover .related-story-title {
+    color: var(--dominant-color);
+}
+.related-story-category {
+    display: block;
+    font-family: var(--font-details);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--gray-details);
+}

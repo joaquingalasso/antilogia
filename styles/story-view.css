@@ -1,0 +1,269 @@
+
+
+/* --- Story View --- */
+.story-view { max-width: 800px; margin: 0 auto; }
+.story-view-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.story-view .back-button {
+    margin-bottom: 1.25rem;
+}
+.story-header { margin-bottom: 3rem; padding-bottom: 2rem; position: relative; }
+.story-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-mask-image: var(--story-icon-url);
+    mask-image: var(--story-icon-url);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 75%;
+    mask-size: 75%;
+    background-color: var(--story-header-color);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+}
+.story-header h1 { color: var(--story-header-color); }
+.story-header::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
+    background-image: linear-gradient(to right, var(--outline-color) 2px, transparent 2px);
+    background-size: 10px 1px; background-repeat: repeat-x;
+}
+.story-header .tagline { font-size: 1.25rem; }
+
+/* --- Story Content (now block-based) --- */
+.story-content { 
+    font-size: 1.1rem; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.story-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* 
+  Removed the generic max-width rule to allow content to span the full width of the container.
+  Individual element margins are handled below or in global.css.
+*/
+
+/* --- Drop Cap Effect --- */
+.story-content > p:first-of-type::first-letter {
+    font-family: var(--font-details); /* Oswald */
+    font-weight: 400;
+    font-size: 3em; /* Adjusted to span approximately two lines */
+    color: var(--dominant-color);
+    float: left;
+    line-height: 0.85; /* Adjusted for alignment with new size */
+    margin-right: 0.1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.05em;
+    transition: color 0.5s var(--ease-out-quart);
+}
+
+
+/* --- Individual Block Styling --- */
+.story-content ul, .story-content ol {
+    padding-left: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.story-content li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+.story-content blockquote {
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--dominant-color);
+    font-style: italic;
+    color: var(--gray-details);
+    transition: border-color 0.5s var(--ease-out-quart);
+}
+.story-content blockquote.thought {
+    border: none;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    border-top: 1px dotted var(--outline-color);
+    border-bottom: 1px dotted var(--outline-color);
+    font-style: italic;
+    margin: 2rem 0; /* Ensures full-width behavior */
+}
+.story-content blockquote.centered-quote {
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin: 2rem auto;
+    font-size: 1.3rem;
+    font-family: var(--font-header-main);
+    font-style: italic;
+    color: var(--text-color);
+}
+.story-content .dialogue {
+    text-align: center;
+    font-family: var(--font-header-main);
+    font-style: italic;
+    font-size: 2rem;
+    color: var(--dominant-color);
+    margin: 2.5rem 0 0.5rem 0;
+    transition: color 0.5s var(--ease-out-quart);
+}
+.story-content .dialogue-attribution {
+    text-align: center;
+    margin-top: -0.25rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gray-details);
+}
+.story-content strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+.story-content em {
+    color: var(--text-color);
+    font-style: italic;
+}
+.story-content h2 {
+    text-align: center;
+    margin-top: 3rem;
+}
+.story-content h2::before,
+.story-content h2::after {
+    font-family: serif;
+    opacity: 0.6;
+    font-weight: normal;
+    color: var(--dominant-color);
+    font-size: 0.8em;
+    vertical-align: middle;
+    transition: color 0.5s var(--ease-out-quart);
+}
+.story-content h2::before {
+    content: var(--fleuron-left);
+    margin-right: 0.5em;
+}
+.story-content h2::after {
+    content: var(--fleuron-right);
+    margin-left: 0.5em;
+}
+
+
+/* --- Custom Audio Player --- */
+.play-pause-button {
+    background-color: transparent; border: 1px solid var(--dominant-color); color: var(--dominant-color);
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center; cursor: pointer; font-size: 1rem;
+    padding-left: 2px; transition: all 0.3s ease, color 0.5s var(--ease-out-quart), border-color 0.5s var(--ease-out-quart);
+}
+.play-pause-button:hover { background-color: var(--dominant-color); color: var(--bg-color); transform: scale(1.1); }
+.play-pause-button[aria-label="Pausar"] { padding-left: 0; font-size: 1.2rem; }
+.audio-timeline { flex-grow: 1; display: flex; align-items: center; gap: 1rem; }
+.progress-bar-container { width: 100%; height: 4px; background-color: var(--outline-color); border-radius: 2px; cursor: pointer; overflow: hidden; }
+.progress-bar { height: 100%; background-color: var(--dominant-color); border-radius: 2px; transition: width 0.1s linear, background-color 0.5s var(--ease-out-quart); }
+.time-display { font-family: var(--font-details); font-size: 0.9rem; color: var(--gray-details); letter-spacing: 0.05em; min-width: 90px; text-align: right; }
+
+
+/* --- End of story ornament --- */
+.ornament-figure {
+    margin: 0; /* Remove default figure margin */
+}
+
+.cul-de-lampe {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    margin: 3rem auto;
+    width: 100%;
+}
+.cul-de-lampe::before,
+.cul-de-lampe::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-image: linear-gradient(to right, var(--outline-color) 2px, transparent 2px);
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+}
+.cul-de-lampe span {
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--dominant-color);
+    font-family: serif;
+    opacity: 0.9;
+    transition: color 0.5s var(--ease-out-quart);
+    display: inline-block;
+}
+.cul-de-lampe span:not(.ornament-svg):empty::before {
+    content: var(--cul-de-lampe);
+}
+
+.cul-de-lampe .ornament-svg svg {
+    display: block;
+    width: auto;
+    height: 1.75rem; /* Match font-size of default ornament */
+    fill: var(--dominant-color);
+    transition: fill 0.5s var(--ease-out-quart);
+}
+
+
+/* --- Share Buttons --- */
+.share-buttons { display: flex; align-items: center; gap: 0.75rem ; flex-wrap: wrap; justify-content: center; }
+.share-button {
+    background: transparent; border: 1px solid var(--outline-color); color: var(--gray-details);
+    width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex;
+    align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+.share-button:hover { transform: scale(1.1); color: var(--dominant-color); border-color: var(--dominant-color); }
+
+/* --- Sharing Area with background --- */
+.story-sharing-area {
+    position: relative;
+    margin-top: -3.9rem; /* Overlap with cul-de-lampe's bottom margin */
+    padding: 3rem 0 4rem 0; /* Create space and maintain layout rhythm */
+    z-index: 0;
+}
+.story-sharing-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    -webkit-mask-image: var(--sharing-area-bg-url);
+    mask-image: var(--sharing-area-bg-url);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 70%;
+    mask-size: 70%;
+    background-color: var(--story-header-color);
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Comments Section --- */
+.comments-section {
+  margin-top: 0; /* Spacing is now handled by story-sharing-area padding */
+  padding-top: 2rem; 
+  text-align: center; 
+  position: relative;
+}
+
+.giscus {
+    text-align: left;
+    margin-top: 2rem;
+}

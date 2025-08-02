@@ -1,14 +1,7 @@
-/* --- Giscus Custom Theme for Antilogía --- */
+/* --- Giscus Custom Theme for Antilogía (Light Mode) --- */
 
 /* 
-  This file defines styles for the Giscus commenting system to match the
-  light and dark themes of the main application. It is intended to be used
-  as a custom theme URL in Giscus settings, or imported directly.
-*/
-
-/* 
-  STEP 1: Define color palettes for both themes using CSS variables.
-  Giscus applies `data-theme="light"` or `data-theme="dark"` to its root element.
+  STEP 1: Define color palettes for the light theme using CSS variables.
 */
 :root {
   /* Font Families from the main app */
@@ -21,21 +14,21 @@
   /* Light Mode Palette */
   --bg-color-light: #ffefe1;
   --text-color-light: #2b2b2b;
-  --gray-details-light: #828282; /* Using this for borders for better contrast */
+  --gray-details-light: #828282;
   --dominant-color-light: #f17c0a;
   --accent-color-light: #e43c00;
   --hover-bg-color-light: rgba(0,0,0,0.04);
   --footer-text-light: #ffefe1;
   --shadow-color-light: rgba(43, 43, 43, 0.12);
 
-  /* Default to light theme values */
+  /* Set Giscus variables to light theme values */
   --gsc-main-bg: var(--bg-color-light);
   --gsc-main-text: var(--text-color-light);
   --gsc-secondary-text: var(--gray-details-light);
   --gsc-accent-text: var(--dominant-color-light);
-  --gsc-border-color: var(--gray-details-light); /* Better contrast */
+  --gsc-border-color: var(--gray-details-light);
   --gsc-hover-bg: var(--hover-bg-color-light);
-  --gsc-input-bg: #fff; /* A slightly different bg for inputs */
+  --gsc-input-bg: #fff;
   --gsc-overlay-bg: var(--bg-color-light);
   --gsc-shadow-color: var(--shadow-color-light);
   --gsc-button-primary-bg: var(--dominant-color-light);
@@ -43,37 +36,12 @@
   --gsc-button-primary-hover-bg: var(--accent-color-light);
 }
 
-[data-theme="dark"] {
-  /* Dark Mode Palette */
-  --bg-color-dark: #2b2b2b;
-  --text-color-dark: #ffefe1;
-  --gray-details-dark: #a5a5a5; /* Using this for borders for better contrast */
-  --dominant-color-dark: #0178e0;
-  --accent-color-dark: #0cafef;
-  --hover-bg-color-dark: rgba(255,255,255,0.08);
-  --footer-text-dark: #ffefe1;
-  --shadow-color-dark: rgba(0, 0, 0, 0.35);
-
-  --gsc-main-bg: var(--bg-color-dark);
-  --gsc-main-text: var(--text-color-dark);
-  --gsc-secondary-text: var(--gray-details-dark);
-  --gsc-accent-text: var(--dominant-color-dark);
-  --gsc-border-color: var(--gray-details-dark); /* Better contrast */
-  --gsc-hover-bg: var(--hover-bg-color-dark);
-  --gsc-input-bg: #212121; /* A slightly different bg for inputs */
-  --gsc-overlay-bg: #353535; /* Darker bg for overlays */
-  --gsc-shadow-color: var(--shadow-color-dark);
-  --gsc-button-primary-bg: var(--dominant-color-dark);
-  --gsc-button-primary-text: var(--footer-text-dark);
-  --gsc-button-primary-hover-bg: var(--accent-color-dark);
-}
 
 /* 
   STEP 2: Override Giscus's default Primer CSS variables with our new theme variables.
-  This ensures that all Giscus components inherit our theme's look and feel.
 */
 .giscus-frame {
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 .gsc-main {
