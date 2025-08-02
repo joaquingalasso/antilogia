@@ -145,7 +145,7 @@
   border-color: var(--gsc-accent-text);
 }
 .btn-primary {
-    color: var(--gsc-secondary-text) !important;
+    color: var(--gsc-button-primary-text) !important;
 }
 .btn-primary:hover:not(:disabled) {
   color: var(--gsc-button-primary-text) !important;
@@ -223,6 +223,11 @@
   border: 1px solid transparent;
   color: var(--gsc-secondary-text);
   transition: all 0.3s ease;
+  display: inline-flex !important; /* Asegura alineación controlada */
+  align-items: center !important; /* Centra verticalmente emoji y texto */
+  justify-content: center;
+  line-height: 1.2 !important; /* Evita line-heights raros */
+  gap: 0.25rem; /* Espacio entre emoji y número si lo hay */
 }
 .gsc-social-reaction-summary-item:hover:enabled {
   border-color: var(--gsc-accent-text);
