@@ -145,7 +145,7 @@
   border-color: var(--gsc-accent-text);
 }
 .btn-primary {
-    color: var(--gsc-button-primary-text) !important;
+    color: var(--gsc-secondary-text) !important;
 }
 .btn-primary:hover:not(:disabled) {
   color: var(--gsc-button-primary-text) !important;
