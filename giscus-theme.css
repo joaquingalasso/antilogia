@@ -259,27 +259,25 @@
   color: var(--gsc-secondary-text);
 }
 
+/* Forzar alineación de los emojis dentro de las pills de reacciones */
 .gsc-social-reaction-summary-item {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  line-height: 1 !important;
-  gap: 0.25rem !important;
-  vertical-align: middle !important;
 }
 
-.gsc-social-reaction-summary-item .gsc-social-reaction-summary-item-icon {
-  display: inline-flex !important;
+.gsc-social-reaction-summary-item > .gsc-social-reaction-summary-item-icon {
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 1rem; /* Ajustá si querés que el emoji sea más grande o más chico */
   line-height: 1 !important;
   position: relative;
-  top: 0; /* Forzamos a eliminar cualquier desplazamiento */
+  top: 0 !important;
 }
 
-.gsc-social-reaction-summary-item .gsc-social-reaction-summary-item-count {
-  display: inline-flex !important;
+.gsc-social-reaction-summary-item > .gsc-social-reaction-summary-item-count {
+  display: flex !important;
   align-items: center !important;
+  margin-left: 0.25rem;
   line-height: 1 !important;
 }
