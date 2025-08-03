@@ -1,64 +1,260 @@
-main {
-    /* Colores base */
-    --color-fg-default: #ffefe1;
-    --color-fg-muted: #a5a5a5;
-    --color-fg-subtle: #828282;
+/* --- Giscus Custom Theme for Antilogía (Dark Mode) --- */
+
+/* 
+  STEP 1: Define color palettes for the dark theme using CSS variables.
+*/
+:root {
+    /* Font Families from the main app */
+    --font-header-main: 'Asap', sans-serif;
+    --font-tagline: 'Chivo Mono', monospace;
+    --font-details: 'Oswald', sans-serif;
+    --font-header-sub: 'Asap', sans-serif;
+    --font-body: 'Chivo Mono', monospace;
   
-    --color-canvas-default: #2b2b2b;
-    --color-canvas-overlay: #353535;
-    --color-canvas-inset: #1e1e1e;
-    --color-canvas-subtle: #2f2f2f;
+    /* Dark Mode Palette */
+    --bg-color-dark: #2b2b2b;
+    --text-color-dark: #ffefe1;
+    --gray-details-dark: #a5a5a5;
+    --dominant-color-dark: #0178e0;
+    --accent-color-dark: #0cafef;
+    --hover-bg-color-dark: rgba(255,255,255,0.08);
+    --footer-text-dark: #ffefe1;
+    --shadow-color-dark: rgba(0, 0, 0, 0.35);
   
-    --color-border-default: #5a5a5a;
-    --color-border-muted: rgba(90, 90, 90, 0.5);
-    --color-neutral-muted: rgba(165, 165, 165, 0.2);
-  
-    --color-accent-fg: #0178e0;
-    --color-accent-emphasis: #0178e0;
-    --color-accent-muted: rgba(1, 120, 224, 0.4);
-    --color-accent-subtle: rgba(1, 120, 224, 0.1);
-  
-    --color-success-fg: #3fb950;
-    --color-attention-fg: #0cafef;
-    --color-attention-muted: rgba(12, 175, 239, 0.4);
-    --color-attention-subtle: rgba(12, 175, 239, 0.1);
-  
-    --color-danger-fg: #f85149;
-    --color-danger-muted: rgba(248, 81, 73, 0.4);
-    --color-danger-subtle: rgba(248, 81, 73, 0.1);
-  
-    --color-btn-text: #ffefe1;
-    --color-btn-bg: #353535;
-    --color-btn-border: rgba(90, 90, 90, 0.5);
-    --color-btn-hover-bg: rgba(255, 255, 255, 0.08);
-    --color-btn-hover-border: rgba(165, 165, 165, 0.8);
-  
-    --color-btn-primary-text: #ffefe1;
-    --color-btn-primary-bg: #0178e0;
-    --color-btn-primary-border: transparent;
-    --color-btn-primary-hover-bg: #0cafef;
-    --color-btn-primary-hover-border: transparent;
-  
-    --color-social-reaction-bg-hover: rgba(255, 255, 255, 0.08);
-    --color-social-reaction-bg-reacted-hover: rgba(1, 120, 224, 0.12);
-  
-    /* Bordes y sombras suaves */
-    --color-primer-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    /* Set Giscus variables to dark theme values */
+    --gsc-main-bg: var(--bg-color-dark);
+    --gsc-main-text: var(--text-color-dark);
+    --gsc-secondary-text: var(--gray-details-dark);
+    --gsc-accent-text: var(--dominant-color-dark);
+    --gsc-border-color: var(--gray-details-dark);
+    --gsc-hover-bg: var(--hover-bg-color-dark);
+    --gsc-input-bg: #212121;
+    --gsc-overlay-bg: #353535;
+    --gsc-shadow-color: var(--shadow-color-dark);
+    --gsc-button-primary-bg: var(--dominant-color-dark);
+    --gsc-button-primary-text: var(--footer-text-dark);
+    --gsc-button-primary-hover-bg: var(--accent-color-dark);
   }
   
-  main .gsc-comment-box,
-  main .gsc-comment-content,
-  main .gsc-social-reaction-summary-item,
-  main .btn,
-  main .SelectMenu,
-  main .gsc-reactions-button {
+  
+  /* 
+    STEP 2: Override Giscus's default Primer CSS variables with our new theme variables.
+  */
+  .giscus-frame {
+    color-scheme: dark;
+  }
+  
+  .gsc-main {
+    /* Layout & Spacing */
+    max-width: 100%; /* Fit container */
+  
+    /* Set Primer variables to use our theme variables */
+    --color-fg-default: var(--gsc-main-text);
+    --color-fg-muted: var(--gsc-secondary-text);
+    --color-fg-subtle: var(--gsc-secondary-text);
+    
+    --color-canvas-default: transparent; /* Main widget background is transparent */
+    --color-canvas-overlay: var(--gsc-overlay-bg); /* Popups have a solid background */
+    --color-canvas-subtle: var(--gsc-hover-bg);
+    --color-canvas-inset: var(--gsc-input-bg); /* Background for text area */
+  
+    --color-border-default: var(--gsc-border-color);
+    --color-border-muted: var(--gsc-border-color);
+  
+    --color-shadow-large: 0 16px 32px var(--gsc-shadow-color);
+    --color-shadow-medium: 0 8px 16px var(--gsc-shadow-color);
+    --color-shadow-small: 0 2px 8px var(--gsc-shadow-color);
+    
+    --color-accent-fg: var(--gsc-accent-text);
+    --color-accent-emphasis: var(--gsc-accent-text);
+    --color-accent-muted: var(--gsc-accent-text);
+    --color-accent-subtle: var(--gsc-hover-bg);
+    
+    --color-btn-text: var(--gsc-main-text);
+    --color-btn-bg: var(--gsc-hover-bg); /* Default buttons are subtly filled */
+    --color-btn-border: transparent; /* No border by default */
+    --color-btn-hover-bg: var(--gsc-hover-bg);
+    --color-btn-hover-border: var(--gsc-accent-text); /* Border appears on hover */
+    --color-btn-active-bg: var(--gsc-hover-bg);
+    --color-btn-active-border: var(--gsc-accent-text);
+  
+    --color-btn-primary-text: var(--gsc-button-primary-text);
+    --color-btn-primary-bg: var(--gsc-button-primary-bg);
+    --color-btn-primary-border: var(--gsc-button-primary-bg);
+    --color-btn-primary-hover-bg: var(--gsc-button-primary-hover-bg);
+    --color-btn-primary-hover-border: var(--gsc-button-primary-hover-bg);
+  
+    --color-input-bg: var(--gsc-input-bg);
+    --color-input-border: var(--gsc-border-color);
+    --color-input-focus-border: var(--gsc-accent-text);
+    
+    --color-neutral-muted: var(--gsc-hover-bg);
+  }
+  
+  /* 
+    STEP 3: Add specific overrides for a more polished integration.
+  */
+  
+  /* --- Comment Box --- */
+  .gsc-comment-box {
+    background-color: var(--gsc-hover-bg);
+    border-radius: 12px;
+    border: 1px solid transparent;
+    padding: 0.5rem;
+    transition: border-color 0.3s ease;
+  }
+  .gsc-comment-box-tabs {
+    background-color: transparent;
+    padding: 0 0.5rem;
+  }
+  .gsc-comment-box .tabnav-tab {
+    border-radius: 8px !important;
+    border: none !important;
+  }
+  .gsc-comment-box .tabnav-tab[aria-selected="true"] {
+    background-color: var(--gsc-main-bg) !important;
+  }
+  .gsc-comment-box-textarea {
+    font-family: var(--font-body);
+    background-color: var(--gsc-main-bg) !important;
+    border-radius: 8px;
+  }
+  .gsc-comment-box-textarea:focus {
+    box-shadow: 0 0 0 2px var(--gsc-accent-text) !important;
+  }
+  .gsc-comment-box-buttons {
+      padding: 0.5rem !important;
+  }
+  
+  /* --- Buttons --- */
+  .btn {
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-details);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+    border: 1px solid transparent;
+  }
+  .btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    color: var(--gsc-accent-text);
+    border-color: var(--gsc-accent-text);
+  }
+  .btn-primary {
+      color: var(--gsc-button-primary-text) !important;
+  }
+  .btn-primary:hover:not(:disabled) {
+    color: var(--gsc-button-primary-text) !important;
+    border-color: transparent;
+    transform: translateY(-2px);
+  }
+  
+  /* --- Popups and Menus --- */
+  .SelectMenu {
     border-radius: 12px !important;
-    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    box-shadow: var(--color-shadow-large) !important;
+    border: 1px solid var(--gsc-border-color) !important;
+    background-color: var(--gsc-overlay-bg) !important;
+  }
+  .SelectMenu-list {
+    padding: 0.5rem !important;
+  }
+  .SelectMenu-item {
+    border-radius: 8px !important;
+    font-family: var(--font-body);
   }
   
-  main .btn:hover,
-  main .gsc-reactions-button:hover,
-  main .gsc-social-reaction-summary-item:hover {
-    transform: translateY(-1px);
+  /* --- Comments & Markdown --- */
+  .gsc-comment-content {
+    background-color: transparent;
+    border-radius: 12px;
+    border: 1px solid var(--gsc-border-color);
+    overflow: hidden;
+  }
+  .gsc-comment-header {
+    background-color: var(--gsc-hover-bg);
+    padding: 0.75rem 1rem;
+  }
+  .gsc-comment-body {
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+  }
+  .markdown {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .markdown a {
+    color: var(--gsc-accent-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gsc-accent-text);
+    transition: all 0.2s ease;
+  }
+  .markdown a:hover {
+    background-color: var(--gsc-accent-text);
+    color: var(--gsc-button-primary-text);
+  }
+  .markdown pre {
+    background-color: var(--gsc-input-bg) !important;
+    border: 1px solid var(--gsc-border-color);
+    border-radius: 8px;
   }
   
+  /* --- Reactions --- */
+  .gsc-reactions-button {
+      background-color: transparent !important;
+      border: 1px dashed var(--gsc-border-color) !important;
+      border-radius: 20px !important;
+      padding: 0.5rem 1rem !important;
+  }
+  .gsc-reactions-button:hover:enabled {
+      border-style: solid !important;
+      border-color: var(--gsc-accent-text) !important;
+      background-color: var(--gsc-hover-bg) !important;
+  }
+  .gsc-social-reaction-summary-item {
+    border-radius: 16px;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--gsc-hover-bg);
+    border: 1px solid transparent;
+    color: var(--gsc-secondary-text);
+    transition: all 0.3s ease;
+  }
+  .gsc-social-reaction-summary-item:hover:enabled {
+    border-color: var(--gsc-accent-text);
+    color: var(--gsc-accent-text);
+  }
+  .gsc-social-reaction-summary-item[aria-pressed="true"] {
+    border-color: var(--gsc-accent-text) !important;
+    background: var(--gsc-hover-bg) !important;
+    color: var(--gsc-accent-text) !important;
+  }
+  
+  /* --- Timeline & Separators --- */
+  .gsc-tl-line { background-color: var(--gsc-border-color); }
+  .gsc-timeline::before { background-color: var(--gsc-border-color); }
+  
+  /* --- Loading State --- */
+  .gsc-loading-image { display: none; }
+  .gsc-loading::before {
+    content: '...';
+    display: block;
+    font-family: var(--font-header-main);
+    font-size: 3rem;
+    color: var(--gsc-accent-text);
+    text-align: center;
+    animation: gsc-loading-pulse 1.5s infinite ease-in-out;
+  }
+  @keyframes gsc-loading-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+  }
+  .gsc-loading-text {
+    font-family: var(--font-tagline);
+    color: var(--gsc-secondary-text);
+  }
