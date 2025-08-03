@@ -1,0 +1,64 @@
+main {
+    /* Colores base */
+    --color-fg-default: #2b2b2b;
+    --color-fg-muted: #828282;
+    --color-fg-subtle: #a5a5a5;
+  
+    --color-canvas-default: #ffefe1;
+    --color-canvas-overlay: #fff9f4;
+    --color-canvas-inset: #fff4e8;
+    --color-canvas-subtle: #fff7ef;
+  
+    --color-border-default: #a5a5a5;
+    --color-border-muted: rgba(165, 165, 165, 0.5);
+    --color-neutral-muted: rgba(130, 130, 130, 0.2);
+  
+    --color-accent-fg: #f17c0a;
+    --color-accent-emphasis: #f17c0a;
+    --color-accent-muted: rgba(241, 124, 10, 0.4);
+    --color-accent-subtle: rgba(241, 124, 10, 0.1);
+  
+    --color-success-fg: #1a7f37;
+    --color-attention-fg: #e43c00;
+    --color-attention-muted: rgba(228, 60, 0, 0.4);
+    --color-attention-subtle: rgba(228, 60, 0, 0.1);
+  
+    --color-danger-fg: #d1242f;
+    --color-danger-muted: rgba(209, 36, 47, 0.4);
+    --color-danger-subtle: rgba(209, 36, 47, 0.1);
+  
+    --color-btn-text: #2b2b2b;
+    --color-btn-bg: #fff7ef;
+    --color-btn-border: rgba(165, 165, 165, 0.5);
+    --color-btn-hover-bg: rgba(0, 0, 0, 0.04);
+    --color-btn-hover-border: rgba(165, 165, 165, 0.8);
+  
+    --color-btn-primary-text: #ffefe1;
+    --color-btn-primary-bg: #f17c0a;
+    --color-btn-primary-border: transparent;
+    --color-btn-primary-hover-bg: #e43c00;
+    --color-btn-primary-hover-border: transparent;
+  
+    --color-social-reaction-bg-hover: rgba(0, 0, 0, 0.04);
+    --color-social-reaction-bg-reacted-hover: rgba(241, 124, 10, 0.08);
+  
+    /* Bordes y sombras suaves */
+    --color-primer-shadow-inset: inset 0 1px 2px rgba(165, 165, 165, 0.1);
+  }
+  
+  main .gsc-comment-box,
+  main .gsc-comment-content,
+  main .gsc-social-reaction-summary-item,
+  main .btn,
+  main .SelectMenu,
+  main .gsc-reactions-button {
+    border-radius: 12px !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+  }
+  
+  main .btn:hover,
+  main .gsc-reactions-button:hover,
+  main .gsc-social-reaction-summary-item:hover {
+    transform: translateY(-1px);
+  }
+  
